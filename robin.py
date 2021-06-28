@@ -48,6 +48,7 @@ class RoundRobin:
             if self.active != "":
                 if self.active.start == "Unset":
                     self.active.start = self.current_time
+                    self.active.last = self.active.start
                 else:
                     self.active.last = self.current_time
                 self.final_queue.append(self.active)
@@ -57,6 +58,7 @@ class RoundRobin:
                     self.active.remain -= 1
 
                 if self.active.remain == 0 or self.active.last == self.current_time - self.quantum:
+                    print("Time out for", self.active.name)
                     self.active.empty += 1
                     self.active.segments += 1
                     self.wait_queue.append(self.active)

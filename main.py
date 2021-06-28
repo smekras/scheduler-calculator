@@ -3,8 +3,8 @@ import utils
 from process import Process
 
 # processes = [Process("P1", 1, 3), Process("P2", 3, 7), Process("P3", 5, 1),
-#              Process("P4", 11, 5), Process("P5", 13, 2)]
-processes = [Process("P1", 1, 3), Process("P2", 3, 7)]
+# Process("P4", 11, 5), Process("P5", 13, 2)]
+processes = [Process("P1", 1, 3), Process("P2", 3, 7), Process("P3", 5, 1)]
 
 if __name__ == '__main__':
     start = 0
