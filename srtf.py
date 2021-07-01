@@ -1,19 +1,21 @@
-# processes = [
-#     {"name": "P1", "arrival": 1, "burst": 3, "remain": 3, "start": "Unset", "last": 0, "end": "Unset", "segments": 1},
-#     {"name": "P2", "arrival": 3, "burst": 7, "remain": 7, "start": "Unset", "last": 0, "end": "Unset", "segments": 1},
-#     {"name": "P3", "arrival": 5, "burst": 1, "remain": 1, "start": "Unset", "last": 0, "end": "Unset", "segments": 1},
-#     {"name": "P4", "arrival": 11, "burst": 5, "remain": 5, "start": "Unset", "last": 0, "end": "Unset", "segments": 1},
-#     {"name": "P5", "arrival": 13, "burst": 2, "remain": 2, "start": "Unset", "last": 0, "end": "Unset", "segments": 1}]
-
-control = ['P1', 'P2', 'P2', 'P3', 'P1', 'P4', 'P4', 'P4', 'P1', 'P1',
-           'P1', 'P1', 'P5', 'P5', 'P5', 'P5', '--', '--', '--', '--']
-
 processes = [
-    {"name": "P1", "arrival": 0, "burst": 6, "remain": 6, "start": "Unset", "last": 0, "end": "Unset", "segments": 1, "priority": 1},
-    {"name": "P2", "arrival": 1, "burst": 2, "remain": 2, "start": "Unset", "last": 0, "end": "Unset", "segments": 1, "priority": 1},
-    {"name": "P3", "arrival": 2, "burst": 1, "remain": 1, "start": "Unset", "last": 0, "end": "Unset", "segments": 1, "priority": 1},
-    {"name": "P4", "arrival": 5, "burst": 3, "remain": 3, "start": "Unset", "last": 0, "end": "Unset", "segments": 1, "priority": 1},
-    {"name": "P5", "arrival": 7, "burst": 4, "remain": 4, "start": "Unset", "last": 0, "end": "Unset", "segments": 1, "priority": 1}]
+    {"name": "P1", "arrival": 1, "burst": 3, "remain": 3, "start": "Unset", "last": 0, "end": "Unset", "segments": 1},
+    {"name": "P2", "arrival": 3, "burst": 7, "remain": 7, "start": "Unset", "last": 0, "end": "Unset", "segments": 1},
+    {"name": "P3", "arrival": 5, "burst": 1, "remain": 1, "start": "Unset", "last": 0, "end": "Unset", "segments": 1},
+    {"name": "P4", "arrival": 11, "burst": 5, "remain": 5, "start": "Unset", "last": 0, "end": "Unset", "segments": 1},
+    {"name": "P5", "arrival": 13, "burst": 2, "remain": 2, "start": "Unset", "last": 0, "end": "Unset", "segments": 1}]
+
+control = ['--', 'P1', 'P1', 'P1', 'P2', 'P3', 'P2', 'P2', 'P2', 'P2', 'P2', 'P2', 'P4', 'P5', 'P5', 'P4', 'P4', 'P4', 'P4', '--']
+
+# processes = [
+#     {"name": "P1", "arrival": 0, "burst": 6, "remain": 6, "start": "Unset", "last": 0, "end": "Unset", "segments": 1, "priority": 1},
+#     {"name": "P2", "arrival": 1, "burst": 2, "remain": 2, "start": "Unset", "last": 0, "end": "Unset", "segments": 1, "priority": 1},
+#     {"name": "P3", "arrival": 2, "burst": 1, "remain": 1, "start": "Unset", "last": 0, "end": "Unset", "segments": 1, "priority": 1},
+#     {"name": "P4", "arrival": 5, "burst": 3, "remain": 3, "start": "Unset", "last": 0, "end": "Unset", "segments": 1, "priority": 1},
+#     {"name": "P5", "arrival": 7, "burst": 4, "remain": 4, "start": "Unset", "last": 0, "end": "Unset", "segments": 1, "priority": 1}]
+
+# control = ['P1', 'P2', 'P2', 'P3', 'P1', 'P4', 'P4', 'P4', 'P1', 'P1',
+#            'P1', 'P1', 'P5', 'P5', 'P5', 'P5', '--', '--', '--', '--']
 
 active = []
 running_queue = []
@@ -55,11 +57,11 @@ while not done:
     else:
         final_queue.append("--")
 
-    print("Time:", current_time)
+    print("Time:", current_time, end=" > ")
     if active:
-        print("Active:", active[0]["name"])
+        print(active[0]["name"])
     else:
-        print("Active: --")
+        print("--")
 
     current_time += 1
 
@@ -70,6 +72,8 @@ response = []
 turnaround = []
 wait = []
 
+print()
+
 for p in running_queue:
     rt = p["start"] - p["arrival"]
     response.append(rt)
@@ -79,12 +83,14 @@ for p in running_queue:
     wait.append(wt)
     print(p["name"], "rt:", rt, "tt:", tt, "wt:", wt)
 
+print()
+
 if response:
-    print("\nAverage response time:", sum(response) / len(response))
+    print("Average response time:", sum(response) / len(response))
 if turnaround:
-    print("\nAverage turnaround time:", sum(turnaround) / len(turnaround))
+    print("Average turnaround time:", sum(turnaround) / len(turnaround))
 if wait:
-    print("\nAverage waiting time:", sum(wait) / len(wait))
+    print("Average waiting time:", sum(wait) / len(wait))
 
 if final_queue == control:
     print("\nSuccess:", final_queue)

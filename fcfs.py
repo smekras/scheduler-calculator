@@ -24,7 +24,6 @@ done = 0
 current_time = 0
 
 while not done:
-    print("Time:", current_time)
     if active:
         if active[0]["remain"] > 0:
             active[0]["remain"] -= 1
@@ -43,25 +42,28 @@ while not done:
 
     if active:
         final_queue.append(active[0]["name"])
-        print("Active:", active[0]["name"])
     else:
         final_queue.append("--")
-        print("Active: --")
 
     if not wait_queue and not active:
         done = 1
 
-    # print("Time:", current_time)
-    # if active:
-    #     print("Active:", active[0]["name"])
-    # else:
-    #     print("Active: --")
+    print("Time:", current_time, end=" > ")
+    if active:
+        print(active[0]["name"])
+    else:
+        print("--")
 
     current_time += 1
+
+    if current_time == 20:
+        done = 1
 
 response = []
 turnaround = []
 wait = []
+
+print()
 
 for p in running_queue:
     rt = p["start"] - p["arrival"]
@@ -70,13 +72,16 @@ for p in running_queue:
     turnaround.append(tt)
     wt = tt - p["burst"]
     wait.append(wt)
+    print(p["name"], "rt:", rt, "tt:", tt, "wt:", wt)
+
+print()
 
 if response:
-    print("\nAverage response time:", sum(response) / len(response))
+    print("Average response time:", sum(response) / len(response))
 if turnaround:
-    print("\nAverage turnaround time:", sum(turnaround) / len(turnaround))
+    print("Average turnaround time:", sum(turnaround) / len(turnaround))
 if wait:
-    print("\nAverage waiting time:", sum(wait) / len(wait))
+    print("Average waiting time:", sum(wait) / len(wait))
 
 if final_queue == control:
     print("\nSuccess:", final_queue)
