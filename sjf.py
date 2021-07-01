@@ -39,7 +39,8 @@ while not done:
         if wait_queue:
             wait_queue = sorted(wait_queue, key=lambda k: k['remain'])
             if wait_queue[0]["arrival"] <= current_time:
-                wait_queue[0]["start"] = current_time
+                if wait_queue[0]["start"] == "Unset":
+                    wait_queue[0]["start"] = current_time
                 wait_queue[0]["last"] = current_time
                 active.append(wait_queue[0])
                 wait_queue.pop(0)
