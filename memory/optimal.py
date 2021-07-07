@@ -24,27 +24,17 @@ while not done:
             print(clock, "Frame:", frame, "-", success[clock - 1])
 
         if page not in frame:
-            if page_index + 1 <= len(pages):
-                next_page = pages[page_index + 1]
-            if page_index + 2 <= len(pages):
-                last_page = pages[page_index + 2]
-
-            if next_page and next_page in frame:
-                safe.append(frame.index(next_page))
-
-            if last_page and last_page in frame:
-                safe.append(frame.index(last_page))
-
-            print(safe)
-
-            for i in range(len(frame), 0, 1):
-                if frame[i] not in safe:
-                    frame.append(frame.pop(i))
-
-            safe = []
-            frame.insert(0, page)
-            if len(frame) > 2:
-                frame.pop(3)
+            remaining = pages[page_index:]
+            last_index = -1
+            for f in frame:
+                if f in remaining:
+                    f_index = remaining.index(f)
+                    if f_index > last_index:
+                        last_index = f_index
+            if last_index == -1:
+                frame.insert(0, page)
+                if len(frame) > 3:
+                    frame.pop(3)
             success.append(False)
             faults += 1
             print(clock, "Frame:", frame, "-", success[clock - 1])
