@@ -14,15 +14,15 @@
 #            'P2', 'P4', 'P4', 'P2', 'P5', 'P5', 'P4', 'P4', 'P4', '--']
 
 processes = [
-    {"name": "P1", "arrival": 0, "burst": 6, "remain": 6, "start": "Unset",
+    {"name": "P5", "arrival": 1, "burst": 7, "remain": 7, "start": "Unset",
      "last": 0, "end": "Unset", "segments": 1, "empty": 0},
-    {"name": "P2", "arrival": 1, "burst": 2, "remain": 2, "start": "Unset",
+    {"name": "P1", "arrival": 6, "burst": 6, "remain": 6, "start": "Unset",
      "last": 0, "end": "Unset", "segments": 1, "empty": 1},
-    {"name": "P3", "arrival": 2, "burst": 1, "remain": 1, "start": "Unset",
+    {"name": "P2", "arrival": 9, "burst": 5, "remain": 5, "start": "Unset",
      "last": 0, "end": "Unset", "segments": 1, "empty": 2},
-    {"name": "P4", "arrival": 5, "burst": 3, "remain": 3, "start": "Unset",
+    {"name": "P3", "arrival": 11, "burst": 2, "remain": 2, "start": "Unset",
      "last": 0, "end": "Unset", "segments": 1, "empty": 5},
-    {"name": "P5", "arrival": 7, "burst": 4, "remain": 4, "start": "Unset",
+    {"name": "P4", "arrival": 12, "burst": 4, "remain": 4, "start": "Unset",
      "last": 0, "end": "Unset", "segments": 1, "empty": 7}]
 
 control = ['P1', 'P1', 'P2', 'P2', 'P3', 'P1', 'P1', 'P4', 'P4', 'P5',
@@ -99,7 +99,7 @@ while not done:
 
     current_time += 1
 
-    if current_time == 20:
+    if current_time == 40:
         done = 1
 
 response = []
